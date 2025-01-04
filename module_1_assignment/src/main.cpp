@@ -1,19 +1,32 @@
 #include "Robot.h"
-#include "Actuator.h"
+#include "Sensor.h"
 
-int main() {
-    // Instantiate robot and actuators
-    Robot myRobot("Explorer", 5.0);
-    ArmActuator arm("Left Arm");
-    WheelActuator wheel("Front Left");
+auto main() -> int {
+  // Sensors
+  TemperatureSensor temperatureSensor("TXX");
+  DistanceSensor distanceSensor("DYY");
+  SensorTemplate<char> sensorOther("Prox");
 
-    // Simulate actuator operations
-    myRobot.activateActuator(arm);
-    arm.move(90);
+  // Robots
+  Robot robotA("Robot A", 10.0, 0.5, temperatureSensor, distanceSensor,
+               sensorOther);
 
-    wheel.rotate(-30);
+  robotA.moveForward(1.5);
+  robotA.moveBackward(-1.5);
+  robotA.stop();
+  robotA.readDistance();
+  robotA.readTemperature();
+  robotA.readOther();
 
-    myRobot.deactivateActuator(arm);
+  Robot robotB("Robot B", 20.0, 1.0, temperatureSensor, distanceSensor,
+               sensorOther);
 
-    return 0;
+  robotB.moveForward(2.0);
+  robotB.moveBackward(-2.0);
+  robotB.stop();
+  robotB.readDistance();
+  robotB.readTemperature();
+  robotB.readOther();
+
+  return 0;
 }

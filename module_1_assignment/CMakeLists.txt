@@ -4,9 +4,11 @@ project(module_1_assignment)
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
-
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # find dependencies
-find_package(ament_cmake REQUIRED)
+# find_package(ament_cmake REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
@@ -14,7 +16,8 @@ find_package(ament_cmake REQUIRED)
 
 
 # ADD TASK 4 Executables here
-
+include_directories(include)
+add_executable(mymain src/main.cpp src/Robot.cpp src/Sensor.cpp)
 
 
 if(BUILD_TESTING)
@@ -29,4 +32,4 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-ament_package()
+# ament_package()
