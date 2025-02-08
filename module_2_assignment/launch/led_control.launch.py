@@ -4,13 +4,13 @@ from launch_ros.actions import Node
 def generate_launch_description():
     return LaunchDescription([
         Node(
-            package='led_control',
-            executable='led_publisher',
+            package='module_2_assignment',
+            executable='led_control',
             name='led_publisher',
         ),
         Node(
-            package='led_control',
-            executable='led_subscriber',
+            package='module_2_assignment',
+            executable='led_receiver',
             name='led_subscriber',
         ),
     ])
