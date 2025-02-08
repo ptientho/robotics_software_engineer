@@ -7,6 +7,9 @@ using namespace std::chrono_literals;
 class CmdVelServiceServer : public rclcpp::Node {
 public:
     CmdVelServiceServer() : Node("move_back_and_forth_server") {
+        
+        this->declare_parameter<double>("robot_speed", 1.0);
+        
         this->service_ = this->create_service<module_2_assignment::srv::CmdVel>(
             "cmd_vel_back_and_forth", std::bind(&CmdVelServiceServer::handle_cmd_vel, this, std::placeholders::_1, std::placeholders::_2));
         
@@ -36,12 +39,12 @@ private:
     }
 
     void timerCallback() {
-        // create velocity message using move()
+        auto robot_speed = this->get_parameter("robot_speed").as_double();
         if (this->counter_ % 2 == 0) {
-            this->msg_.linear.x = 1.0;
+            this->msg_.linear.x = robot_speed;
             this->msg_.angular.z = 0.0;
         } else {
-            this->msg_.linear.x = -1.0;
+            this->msg_.linear.x = -robot_speed;
             this->msg_.angular.z = 0.0;
         }
         this->counter_++;

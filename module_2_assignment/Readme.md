@@ -65,3 +65,8 @@ By completing this assignment, you will:
 
 4. **Wait for Review:**
    - Wait for the instructors to review your submission.
+
+
+ros2 param set /move_back_and_forth_server robot_speed 0.2
+ros2 service call /cmd_vel_back_and_forth module_2_assignment/srv/CmdVel "{robot_names:['turtlebot2','turtlebot3','turtlebot4']}"
+
